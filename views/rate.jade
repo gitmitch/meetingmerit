@@ -1,0 +1,45 @@
+extends layout
+block extraheader
+    link(href="/star-rating/css/star-rating.min.css", media="all", rel="stylesheet", type="text/css")
+    script(src="/star-rating/js/star-rating.min.js")
+
+
+block content
+
+    div.intro-header
+        div.row
+            div.col-lg-12.intro-message.without-padding
+
+                - if (errorMessage)
+                    p Error: #{errorMessage}
+                h2 How would you rate this meeting?
+                - if (m.meetingName)
+                    h3 #{m.meetingName}:
+                form(action='/#{meetingHash}/results', method='post')
+                    div.row
+                        div.col-lg-12
+                        input(id='rater', type='number', name='rating')
+                        script.
+                            $("#rater").rating({
+                                step: 1,
+                                size: 'md',
+                                clearCaption: '',
+                                clearCaptionClass: 'label label-danger',
+                                starCaptions: {
+                                    1: 'not valuable for me',
+                                    2: 'meh',
+                                    3: 'slightly valuable',
+                                    4: 'good meeting',
+                                    5: 'excellent meeting!'
+                                    },
+                                showClear: false
+                            });
+                    div.row
+                        div.col-lg-12
+                            textarea.with-vertical-margin(name='comments', maxlength=150, placeholder='Comments (optional, max 150 characters)', rows=5)
+                    div.row
+                        div.col-lg-12
+                            p
+                                input.btn.greybackground(type='submit', value='Submit')
+                            p
+                                input.btn.greybackground(type='submit', value='View Ratings')

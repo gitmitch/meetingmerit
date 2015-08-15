@@ -1,0 +1,58 @@
+extends layout
+
+block content
+
+
+
+
+    div.intro-header
+        div.row
+            //div.col-sm-12.intro-message
+            div(class= meetingToRate ? 'col-sm-12 intro-message' :  'col-sm-12 intro-message lower-padding')
+                - if (meetingToRate)
+                    div.row
+                        h2.col-sm-12 Your Meeting is Ready to Rate!
+                    div.row.with-vertical-margin.linkpanel
+                        div.col-sm-6.col-sm-offset-3
+                            div.panel.panel-default
+                                div.panel-heading Paste this into your meeting invite:
+                                div.panel-body Please rate the effectiveness of this meeting by clicking here: &nbsp;
+                                    a(href='/#{meetingToRate.getMeetingHash()}') #{meetingURL}
+                div
+                    h2 How productive are your meetings?
+                    //h3.with-vertical-margin Ask your colleages to rate your meetings.
+                    form(action='/', method='post')
+                        div.row.with-vertical-margin
+                            div.col-sm-4.col-sm-offset-3
+                                input.form-control(type='text', name='meetingName', placeholder='Meeting Name (optional)')
+                            div.col-sm-2
+                                input.btn.greybackground(type='submit', value='Register Meeting')
+                    - if (errorMessage)
+                        p Error: #{errorMessage}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    //
+    //div.row
+    //    div.col-md-12
+    //        h2= prompt
+    //        form.form-horizontal(action='/', method='post')
+    //            div.form-group
+    //                label.col-md-2.control-label(for='meetingName') Meeting Name (optional)
+    //                div.col-md-3
+    //                    input.form-control(type='text', name='meetingName', placeholder='optional')
+    //
+    //            div.form-group
+    //                div.col-lg-offset-2.col-md-5
+    //                    input.btn.btn-primary(type='submit', value='Register Meeting')

@@ -1,0 +1,43 @@
+doctype html
+html
+  head
+
+    script.
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r;
+            i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date();
+            a = s.createElement(o),
+                    m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+        ga('create', 'UA-59500861-1', 'auto');
+        ga('send', 'pageview');
+
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    title Meeting Merit
+    link(href='http://fonts.googleapis.com/css?family=Open+Sans:200,300,600,300italic', rel='stylesheet', type='text/css')
+    link(rel='stylesheet', href='/bootstrap/css/bootstrap.min.css')
+
+    script(src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js")
+    script(src='/bootstrap/js/bootstrap.min.js')
+
+    block extraheader
+
+    link(rel='stylesheet', href='/stylesheets/style.css')
+  body
+      //nav.navbar.navbar-default.navbar-fixed-top.topnav
+      nav.navbar.navbar-default.navbar-static-top.topnav
+          div.container.topnav
+              div.navbar-header.fullwidth
+                  div.navbar-left
+                      h1
+                        a(href='/') MEETING MERIT
+                          sup &nbsp; BETA
+                  div.subtitle.navbar-collapse.collapse.navbar-right
+                      a(href='/') &nbsp; Ask your colleagues to rate your meetings.
+      block content
+      include footer.jade

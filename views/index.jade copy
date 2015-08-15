@@ -1,0 +1,31 @@
+extends layout
+
+block content
+    //div.row
+    //    div.col-md-12.header
+    div.header
+        h1 Meeting Merit
+        - if (errorMessage)
+            p Error: #{errorMessage}
+    - if (meetingToRate)
+        div.row
+            h2.col-md-12 Your Meeting is Ready to Rate!
+        div.row
+            div.col-md-3
+                div.panel.panel-default
+                    div.panel-heading Paste this into your meeting invite:
+                    div.panel-body Please rate the effectiveness of this meeting by clicking here:
+                        a(href='/#{meetingToRate.getMeetingHash()}') #{meetingURL}
+
+    div.row
+        div.col-md-12
+            h2= prompt
+            form.form-horizontal(action='/', method='post')
+                div.form-group
+                    label.col-md-2.control-label(for='meetingName') Meeting Name (optional)
+                    div.col-md-3
+                        input.form-control(type='text', name='meetingName', placeholder='optional')
+
+                div.form-group
+                    div.col-lg-offset-2.col-md-5
+                        input.btn.btn-primary(type='submit', value='Register Meeting')

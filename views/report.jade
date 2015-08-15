@@ -1,0 +1,54 @@
+extends layout
+
+block extraheader
+    script(src='/Chart.js/Chart.js')
+
+block content
+
+
+    div.intro-header
+        div.container
+            - if (m.meetingName)
+                h2 #{m.meetingName}
+            //- else
+            //    h2 &nbsp;
+            //div.row
+            //    div.col-md-4
+            div.panel.panel-default.results-panel.without-shadow
+                div.panel-heading Ratings
+                div.panel-body.results-body(id='ratingsDiv')
+                    canvas.results-graph(id='ratingsChart')
+                    script.
+                        $('#ratingsChart').width = 400; //$('#ratingsDiv').clientWidth
+                        $('#ratingsChart').height = 300; //$('#ratingsDiv').clientHeight
+                        var ctx = $('#ratingsChart').get(0).getContext('2d')
+                        var chartData = {
+                            labels: [
+                                '1 star',
+                                '2 stars',
+                                '3 stars',
+                                '4 stars',
+                                '5 stars'
+                            ],
+                            datasets: [{
+                                data: !{JSON.stringify(totals)}
+                            }
+                            ]
+                        }
+                        var c = new Chart(ctx).Bar(chartData, {
+                            scaleShowGridLines: false
+                        })
+            - if (ratings && ratings.length > 0)
+                div.panel.panel-default.comments-panel.without-shadow
+                    div.panel-heading Comments
+                    div.panel-body
+                        table.table
+                            tr
+                                // th Date/Time
+                                th Rating
+                                th Comments
+                            for rating in ratings
+                                tr
+                                    // td #{rating.timestamp}
+                                    td #{rating.rating}
+                                    td #{rating.comments}
